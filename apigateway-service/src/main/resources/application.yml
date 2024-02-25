@@ -11,22 +11,28 @@ eureka:
 spring:
   application:
     name: apigateway-service
-#  cloud:
-#    gateway:
-#      routes:
-#        - id: first-service
-#          uri: http://127.0.0.1:8081/
-#          predicates:
-#            - Path=/first-service/**
-#          filters:
-##            - AddRequestHeader=first-request, first-request-header-by-yml
-##            - AddResponseHeader=first-response, first-response-header-by-yml
-#            - CustomFilter
-#        - id: second-service
-#          uri: http://127.0.0.1:8082/
-#          predicates:
-#            - Path=/second-service/**
-#          filters:
-##            - AddRequestHeader=second-request, second-request-header-by-yml
-##            - AddResponseHeader=second-response, second-response-header-by-yml
-#            - CustomFilter
+  cloud:
+    gateway:
+      default-filters:
+        - name: GlobalFilter
+          args:
+            baseMessage: Spring Cloud Gateway Global Filter
+            preLogger: true
+            postLogger: true
+      routes:
+        - id: first-service
+          uri: http://127.0.0.1:8081/
+          predicates:
+            - Path=/first-service/**
+          filters:
+#            - AddRequestHeader=first-request, first-request-header-by-yml
+#            - AddResponseHeader=first-response, first-response-header-by-yml
+            - CustomFilter
+        - id: second-service
+          uri: http://127.0.0.1:8082/
+          predicates:
+            - Path=/second-service/**
+          filters:
+#            - AddRequestHeader=second-request, second-request-header-by-yml
+#            - AddResponseHeader=second-response, second-response-header-by-yml
+            - CustomFilter
