@@ -3,7 +3,7 @@ package com.sjy.userservice.controller;
 import com.sjy.userservice.dto.RequestUser;
 import com.sjy.userservice.dto.ResponseUser;
 import com.sjy.userservice.dto.UserDto;
-import com.sjy.userservice.entity.User;
+import com.sjy.userservice.entity.UserEntity;
 import com.sjy.userservice.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -52,7 +52,7 @@ public class UserController {
 
     @GetMapping("/users")
     public ResponseEntity<List<ResponseUser>> getUsers() {
-        Iterable<User> userList = userService.getUserByAll();
+        Iterable<UserEntity> userList = userService.getUserByAll();
 
         List<ResponseUser> result = new ArrayList<>();
         userList.forEach(v -> {
@@ -63,7 +63,7 @@ public class UserController {
     }
 
     @GetMapping("/users/{userId}")
-    public ResponseEntity getUser(@PathVariable("userId") String userId) {
+    public ResponseEntity<ResponseUser> getUser(@PathVariable("userId") String userId) {
         UserDto userDto = userService.getUserByUserId(userId);
         ResponseUser returnValue = new ModelMapper().map(userDto, ResponseUser.class);
 
