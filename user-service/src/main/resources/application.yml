@@ -36,3 +36,4 @@ greeting:
 
 token:
   expiration_time: 86400000
+  secret: S3cr3tV@lu3ForJWTTokenGenerationWithSufficientLengthForHmacSha512

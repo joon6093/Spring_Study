@@ -5,7 +5,6 @@ import com.sjy.userservice.dto.RequestLogin;
 import com.sjy.userservice.dto.UserDto;
 import com.sjy.userservice.service.UserService;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.http.HttpServletRequest;
@@ -23,6 +22,7 @@ import javax.crypto.SecretKey;
 import java.io.IOException;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Date;
 import java.util.Objects;
 
@@ -59,7 +59,9 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
         String userName = ((User) auth.getPrincipal()).getUsername();
         UserDto userDetails = userService.getUserDetailsByEmail(userName);
 
-        SecretKey key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+        byte[] secretKeyBytes = Base64.getEncoder().encode(Objects.requireNonNull(environment.getProperty("token.secret")).getBytes());
+
+        SecretKey secretKey = Keys.hmacShaKeyFor(secretKeyBytes);
 
         Instant now = Instant.now();
 
@@ -67,7 +69,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
                 .subject(userDetails.getUserId())
                 .expiration(Date.from(now.plusMillis(Long.parseLong(Objects.requireNonNull(environment.getProperty("token.expiration_time"))))))
                 .issuedAt(Date.from(now))
-                .signWith(key)
+                .signWith(secretKey)
                 .compact();
 
         res.addHeader("token", token);

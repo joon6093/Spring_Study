@@ -24,6 +24,14 @@ spring:
           uri: lb://USER-SERVICE
           predicates:
             - Path=/user-service/**
+            - Method=POST
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/user-service/**
+            - Method=GET
+          filters:
+            - AuthorizationHeaderFilter
         - id: catalog-service
           uri: lb://CATALOG-SERVICE
           predicates:
@@ -53,3 +61,6 @@ spring:
                 baseMessage: Hi, there.
                 preLogger: true
                 postLogger: true
+
+token:
+  secret: S3cr3tV@lu3ForJWTTokenGenerationWithSufficientLengthForHmacSha512
