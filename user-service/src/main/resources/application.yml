@@ -33,3 +33,22 @@ eureka:
 
 greeting:
   message: Welcome to the Simple E-commerce.
+
+management:
+  endpoints:
+    enabled-by-default: false
+    web:
+      exposure:
+        include: info, refresh, health, beans
+    jmx:
+      exposure:
+        exclude: '*'
+  endpoint:
+    info:
+      enabled: true
+    refresh:
+      enabled: true
+    health:
+      enabled: true
+    beans:
+      enabled: true

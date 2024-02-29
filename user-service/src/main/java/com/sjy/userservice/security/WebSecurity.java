@@ -43,6 +43,7 @@ public class WebSecurity {
                 .csrf((csrf) -> csrf.disable())
                 .authorizeHttpRequests(
                         authorize -> authorize
+                                .requestMatchers("/actuator/**").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/user-service/users/**").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/user-service/**").permitAll()
                 )
