@@ -21,6 +21,11 @@ spring:
         hbm2ddl.auto: create-drop
     show-sql: true
     open-in-view: true
+  cloud:
+    config:
+      name: token
+  config:
+    import: optional:configserver:http://127.0.0.1:8888
 
 eureka:
   instance:
