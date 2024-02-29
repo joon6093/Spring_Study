@@ -23,15 +23,20 @@ spring:
         - id: user-service
           uri: lb://USER-SERVICE
           predicates:
-            - Path=/user-service/**
-            - Method=POST
+            - Path=/user-service/actuator/**
+          filters:
+            - RewritePath=/user-service/(?<segment>.*), /$\{segment} # "user-service" 제외하고 전달
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/user-service/users/**
+            - Method=GET
+          filters:
+            - AuthorizationHeaderFilter
         - id: user-service
           uri: lb://USER-SERVICE
           predicates:
             - Path=/user-service/**
-            - Method=GET
-          filters:
-            - AuthorizationHeaderFilter
         - id: catalog-service
           uri: lb://CATALOG-SERVICE
           predicates:
@@ -61,6 +66,28 @@ spring:
                 baseMessage: Hi, there.
                 preLogger: true
                 postLogger: true
+    config:
+      name: token
+  config:
+    import: optional:configserver:http://127.0.0.1:8888
 
-token:
-  secret: S3cr3tV@lu3ForJWTTokenGenerationWithSufficientLengthForHmacSha512
+management:
+  endpoints:
+    enabled-by-default: false
+    web:
+      exposure:
+        include: info, refresh, health, beans, httpexchanges
+    jmx:
+      exposure:
+        exclude: '*'
+  endpoint:
+    info:
+      enabled: true
+    refresh:
+      enabled: true
+    health:
+      enabled: true
+    beans:
+      enabled: true
+    httpexchanges:
+      enabled: true
