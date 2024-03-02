@@ -20,7 +20,16 @@ ext {
 }
 
 dependencies {
+    // 스프링 클라우드 설정 서버
     implementation 'org.springframework.cloud:spring-cloud-config-server'
+
+    // 스프링 부트 Actuator
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+    // 스프링 클라우드 스타터 버스 AMQP
+    implementation 'org.springframework.cloud:spring-cloud-starter-bus-amqp'
+
+    // 스프링 부트 테스트
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 

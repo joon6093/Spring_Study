@@ -1,6 +1,18 @@
 server:
   port: 0
 
+greeting:
+  message: Welcome to the Simple E-commerce.
+
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka
+
 spring:
   application:
     name: user-service
@@ -27,24 +39,18 @@ spring:
   config:
     import: optional:configserver:http://127.0.0.1:8888
 
-eureka:
-  instance:
-    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
-  client:
-    register-with-eureka: true
-    fetch-registry: true
-    service-url:
-      defaultZone: http://127.0.0.1:8761/eureka
-
-greeting:
-  message: Welcome to the Simple E-commerce.
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
 
 management:
   endpoints:
     enabled-by-default: false
     web:
       exposure:
-        include: info, refresh, health, beans
+        include: info, refresh, health, beans, busrefresh
     jmx:
       exposure:
         exclude: '*'
@@ -56,4 +62,6 @@ management:
     health:
       enabled: true
     beans:
+      enabled: true
+    busrefresh:
       enabled: true

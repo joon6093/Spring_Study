@@ -38,6 +38,9 @@ dependencies {
     // Spring Boot Actuator를 위한 의존성
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
+    // 스프링 클라우드 스타터 버스 AMQP
+    implementation 'org.springframework.cloud:spring-cloud-starter-bus-amqp'
+
     // JJWT (Java JWT) 라이브러리
     implementation 'io.jsonwebtoken:jjwt-api:0.12.3'
     implementation 'io.jsonwebtoken:jjwt-impl:0.12.3'

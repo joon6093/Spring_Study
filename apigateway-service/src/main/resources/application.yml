@@ -11,6 +11,7 @@ eureka:
 spring:
   application:
     name: apigateway-service
+
   cloud:
     gateway:
       default-filters:
@@ -66,17 +67,24 @@ spring:
                 baseMessage: Hi, there.
                 preLogger: true
                 postLogger: true
+
     config:
       name: token
   config:
     import: optional:configserver:http://127.0.0.1:8888
+
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
 
 management:
   endpoints:
     enabled-by-default: false
     web:
       exposure:
-        include: info, refresh, health, beans, httpexchanges
+        include: info, refresh, health, beans, httpexchanges, busrefresh
     jmx:
       exposure:
         exclude: '*'
@@ -90,4 +98,6 @@ management:
     beans:
       enabled: true
     httpexchanges:
+      enabled: true
+    busrefresh:
       enabled: true
