@@ -1,5 +1,6 @@
 package com.sjy.userservice.service;
 
+import com.sjy.userservice.client.OrderServiceClient;
 import com.sjy.userservice.dto.ResponseOrder;
 import com.sjy.userservice.dto.UserDto;
 import com.sjy.userservice.entity.UserEntity;
@@ -23,6 +24,7 @@ public class UserServiceImpl implements UserService{
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder passwordEncoder;
+    private final OrderServiceClient orderServiceClient;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -50,7 +52,7 @@ public class UserServiceImpl implements UserService{
     public UserDto getUserByUserId(String userId) {
         UserEntity userEntity = userRepository.findByUserId(userId).orElseThrow(() -> new UsernameNotFoundException("User not found with userId: " + userId));
         UserDto userDto = new ModelMapper().map(userEntity, UserDto.class);
-        List<ResponseOrder> orders = new ArrayList<>();
+        List<ResponseOrder> orders = orderServiceClient.getOrders(userId);
         userDto.setOrders(orders);
 
         return userDto;

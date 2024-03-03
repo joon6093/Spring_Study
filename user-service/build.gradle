@@ -58,6 +58,9 @@ dependencies {
     // 스프링 클라우드 스타터 버스 AMQP
     implementation 'org.springframework.cloud:spring-cloud-starter-bus-amqp'
 
+    // 스프링 클라우드 OpenFeign
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+
     // Lombok
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
