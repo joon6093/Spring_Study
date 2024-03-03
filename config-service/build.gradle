@@ -26,6 +26,9 @@ dependencies {
     // 스프링 부트 Actuator
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
+    // 스프링 부트 Bootstrap
+    implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap'
+
     // 스프링 클라우드 스타터 버스 AMQP
     implementation 'org.springframework.cloud:spring-cloud-starter-bus-amqp'
 
