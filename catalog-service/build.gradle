@@ -36,7 +36,7 @@ dependencies {
 	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
 
 	// Kafka 스타터
-	implementation 'org.springframework.cloud:spring-kafka'
+	implementation 'org.springframework.kafka:spring-kafka'
 
 	// ModelMapper
 	implementation 'org.modelmapper:modelmapper:3.2.0'
