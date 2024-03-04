@@ -27,9 +27,7 @@ public class OrderServiceImpl implements OrderService {
 
         orderRepository.save(order);
 
-        OrderDto returnValue = mapper.map(order, OrderDto.class);
-
-        return returnValue;
+        return mapper.map(order, OrderDto.class);
     }
 
     @Override

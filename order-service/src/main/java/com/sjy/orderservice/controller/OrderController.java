@@ -4,6 +4,7 @@ import com.sjy.orderservice.dto.OrderDto;
 import com.sjy.orderservice.dto.RequestOrder;
 import com.sjy.orderservice.dto.ResponseOrder;
 import com.sjy.orderservice.entity.Order;
+import com.sjy.orderservice.messagequeue.KafkaProducer;
 import com.sjy.orderservice.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,6 +29,7 @@ public class OrderController {
 
     private final Environment env;
     private final OrderService orderService;
+    private final KafkaProducer kafkaProducer;
 
     @GetMapping("/health_check")
     public String status() {
@@ -48,6 +50,7 @@ public class OrderController {
         OrderDto createdOrder = orderService.createOrder(orderDto);
         ResponseOrder responseOrder = mapper.map(createdOrder, ResponseOrder.class);
 
+        kafkaProducer.send("ecommerce_catalog", createdOrder);
         return ResponseEntity.status(HttpStatus.CREATED).body(responseOrder);
     }
 
