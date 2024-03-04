@@ -26,13 +26,29 @@ ext {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	// 스프링 부트 스타터
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	// JPA 스타터
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+	// Netflix Eureka 클라이언트 스타터
 	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+
+	// Kafka 스타터
+	implementation 'org.springframework.cloud:spring-kafka'
+
+	// ModelMapper
 	implementation 'org.modelmapper:modelmapper:3.2.0'
+
+	// Lombok
 	compileOnly 'org.projectlombok:lombok'
-	runtimeOnly 'com.h2database:h2'
 	annotationProcessor 'org.projectlombok:lombok'
+
+	// H2 데이터베이스
+	runtimeOnly 'com.h2database:h2'
+
+	// 스프링 부트 스타터 테스트
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
