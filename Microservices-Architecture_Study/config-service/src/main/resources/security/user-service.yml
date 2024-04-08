@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:test
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: '{cipher}f0d33067affced2e0b1a5e3cef985407081da2174a666880cc6324c595b7d7b7'
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+        highlight_sql: true
+        hbm2ddl.auto: create-drop
+    show-sql: true
+    open-in-view: true
+
+token:
+  expiration_time: 86400000
+  secret: '{cipher}129bb6bbba0c7d665c06797f919a458e59137eb5fe3c854646bc2317bb34d5c13630c818b0caa724d967379e4dce5fa39d34c7bb022822075044c4ba7aa2a0c9c17379ca859c39ca768493dd9fa93765c5012db27e31d642a624a7f767a72a9a'
+
