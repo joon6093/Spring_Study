@@ -15,8 +15,8 @@ spring:
   jpa:
     properties:
       hibernate:
-        format_sql: true            # SQL ?? ?? ??
-        highlight_sql: true         # SQL ??
+        format_sql: true
+        highlight_sql: true
         hbm2ddl.auto: create-drop
         default_batch_fetch_size: 100
     open-in-view: true
@@ -25,3 +25,5 @@ spring:
   batch:
     jdbc:
       initialize-schema: always
+    job:
+      enabled: false
