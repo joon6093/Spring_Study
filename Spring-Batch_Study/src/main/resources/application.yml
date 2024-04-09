@@ -1,0 +1,27 @@
+server:
+  port: 8080
+
+spring:
+  config:
+    import:
+      - security/application-db.yml
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://${local-db.host}:${local-db.port}/${local-db.name}
+    username: ${local-db.username}
+    password: ${local-db.password}
+
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true            # SQL ?? ?? ??
+        highlight_sql: true         # SQL ??
+        hbm2ddl.auto: create-drop
+        default_batch_fetch_size: 100
+    open-in-view: true
+    show-sql: true
+
+  batch:
+    jdbc:
+      initialize-schema: always

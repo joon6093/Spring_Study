@@ -27,7 +27,7 @@ dependencies {
 	// Lombok
 	compileOnly 'org.projectlombok:lombok'
 	// Database
-//	runtimeOnly 'org.postgresql:postgresql'
+	runtimeOnly 'org.postgresql:postgresql'
 
 	// Test
 	annotationProcessor 'org.projectlombok:lombok'
