@@ -1,6 +1,6 @@
 package com.sjy.springbatch_study;
 
-import ch.qos.logback.core.net.SyslogOutputStream;
+import org.springframework.batch.core.configuration.support.DefaultBatchConfiguration;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobParameters;
@@ -14,23 +14,22 @@ import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.PlatformTransactionManager;
-import java.util.Map;
 
 @Configuration
-public class HelloJobConfiguration {
+public class JobConfig extends DefaultBatchConfiguration {
 
     @Bean
-    public Job helloJob(JobRepository jobRepository, Step helloStep1, Step helloStep2, Step helloStep3) {
+    public Job Job(JobRepository jobRepository, Step Step1, Step Step2, Step Step3) {
         return new JobBuilder("helloJob", jobRepository)
-                .start(helloStep1)
-                .next(helloStep2)
-                .next(helloStep3)
+                .start(Step1)
+                .next(Step2)
+                .next(Step3)
                 .build();
     }
 
     @Bean
     @JobScope
-    public Step helloStep1(JobRepository jobRepository, PlatformTransactionManager tx, @Value("#{jobParameters[name]}") String name) {
+    public Step Step1(JobRepository jobRepository, PlatformTransactionManager tx, @Value("#{jobParameters[name]}") String name) {
         return new StepBuilder( "helloStep1", jobRepository)
                 .tasklet((contribution, chunkContext) -> {
                     JobParameters jobParameters = contribution.getStepExecution().getJobExecution().getJobParameters();
@@ -60,7 +59,7 @@ public class HelloJobConfiguration {
     }
 
     @Bean
-    public Step helloStep2(JobRepository jobRepository, PlatformTransactionManager tx) {
+    public Step Step2(JobRepository jobRepository, PlatformTransactionManager tx) {
         return new StepBuilder( "helloStep2", jobRepository)
                 .tasklet((contribution, chunkContext) -> {
 //                    Map<String, Object> jobParameters = chunkContext.getStepContext().getJobParameters();
@@ -83,7 +82,7 @@ public class HelloJobConfiguration {
     }
 
     @Bean
-    public Step helloStep3(JobRepository jobRepository, PlatformTransactionManager tx) {
+    public Step Step3(JobRepository jobRepository, PlatformTransactionManager tx) {
         return new StepBuilder( "helloStep3", jobRepository)
                 .tasklet((contribution, chunkContext) -> {
 //                    Map<String, Object> jobParameters = chunkContext.getStepContext().getJobParameters();

@@ -22,8 +22,8 @@ spring:
     open-in-view: true
     show-sql: true
 
-  batch:
-    jdbc:
-      initialize-schema: always
-    job:
-      enabled: false
+#  batch:    # DefaultBatchConfiguration 사용으로 적용 안됨.
+#    jdbc:
+#      initialize-schema: always
+#    job:
+#      enabled: false
