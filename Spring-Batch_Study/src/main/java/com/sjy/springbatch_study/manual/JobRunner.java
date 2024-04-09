@@ -1,4 +1,4 @@
-package com.sjy.springbatch_study;
+package com.sjy.springbatch_study.manual;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Job;
@@ -10,7 +10,6 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Component
 @RequiredArgsConstructor
@@ -25,9 +24,9 @@ public class  JobRunner implements ApplicationRunner {
 
         JobParameters jobParameters = new JobParametersBuilder()
                 .addString("name", "song4")
-//                .addLong("id", 1L)
-//                .addLocalDateTime("data", LocalDateTime.now())
-//                .addDouble("age", 16.6)
+                .addLong("id", 1L)
+                .addLocalDateTime("data", LocalDateTime.now())
+                .addDouble("age", 16.6)
                 .toJobParameters();
 
         jobLauncher.run(job,jobParameters);
