@@ -8,6 +8,8 @@ import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
+
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Component
@@ -24,7 +26,7 @@ public class  JobRunner implements ApplicationRunner {
         JobParameters jobParameters = new JobParametersBuilder()
                 .addString("name", "song")
                 .addLong("id", 1L)
-//                .addDate("data", new Date())
+                .addLocalDateTime("data", LocalDateTime.now())
                 .addDouble("age", 16.6)
                 .toJobParameters();
 

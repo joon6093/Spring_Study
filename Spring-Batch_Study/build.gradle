@@ -28,7 +28,6 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok'
 	// Database
 	runtimeOnly 'org.postgresql:postgresql'
-
 	// Test
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
