@@ -10,7 +10,6 @@ import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.PlatformTransactionManager;
-
 import java.util.Map;
 
 @Configuration
@@ -46,6 +45,7 @@ public class HelloJobConfiguration {
                     System.out.println(jobParameters);
                     System.out.println(" helloStep2 executed ");
                     System.out.println("====================================");
+//                    throw new RuntimeException("helloStep2 Failed");
                     return RepeatStatus.FINISHED;
                 }, tx).build();
     }
