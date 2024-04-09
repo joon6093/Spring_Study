@@ -1,5 +1,6 @@
 package com.sjy.springbatch_study;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.configuration.support.DefaultBatchConfiguration;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.batch.core.Job;
@@ -16,14 +17,16 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.PlatformTransactionManager;
 
 @Configuration
-public class JobConfig extends DefaultBatchConfiguration {
-
+@RequiredArgsConstructor
+public class JobConfig extends DefaultBatchConfiguration{
+    private final JobRepositoryListener jobRepositoryListener;
     @Bean
     public Job Job(JobRepository jobRepository, Step Step1, Step Step2, Step Step3) {
         return new JobBuilder("helloJob", jobRepository)
                 .start(Step1)
                 .next(Step2)
                 .next(Step3)
+                .listener(jobRepositoryListener)
                 .build();
     }
 
