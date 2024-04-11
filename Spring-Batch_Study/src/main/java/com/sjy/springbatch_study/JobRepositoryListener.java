@@ -12,33 +12,33 @@ public class JobRepositoryListener implements JobExecutionListener {
 
     private final JobRepository jobRepository;
 
-//    @Override
-//    public void beforeJob(JobExecution jobExecution) {
-//        String jobName = jobExecution.getJobInstance().getJobName();
-//        JobParameters jobParameters = new JobParametersBuilder().addString("name", "song3").toJobParameters();
-//        JobExecution lastExecution = jobRepository.getLastJobExecution(jobName, jobParameters);
-//        System.out.println("BatchStatus = " + (lastExecution != null ? lastExecution.getStatus().name() : null));
-//        if(lastExecution != null) {
-//            for (StepExecution execution : lastExecution.getStepExecutions()) {
-//                BatchStatus status = execution.getStatus();
-//                System.out.println("BatchStatus = " + status.isRunning());
-//                System.out.println("BatchStatus = " + status.name());
-//            }
-//        }
-//    }
-//
-//    @Override
-//    public void afterJob(JobExecution jobExecution) {
-//        String jobName = jobExecution.getJobInstance().getJobName();
-//        JobParameters jobParameters = new JobParametersBuilder().addString("name", "song4").toJobParameters();
-//        JobExecution lastExecution = jobRepository.getLastJobExecution(jobName, jobParameters);
-//        System.out.println("BatchStatus = " + (lastExecution != null ? lastExecution.getStatus().name() : null));
-//        if(lastExecution != null) {
-//            for (StepExecution execution : lastExecution.getStepExecutions()) {
-//                BatchStatus status = execution.getStatus();
-//                System.out.println("BatchStatus = " + status.isRunning());
-//                System.out.println("BatchStatus = " + status.name());
-//            }
-//        }
-//    }
+    @Override
+    public void beforeJob(JobExecution jobExecution) {
+        String jobName = jobExecution.getJobInstance().getJobName();
+        JobParameters jobParameters = new JobParametersBuilder().addString("name", "song3").toJobParameters();
+        JobExecution lastExecution = jobRepository.getLastJobExecution(jobName, jobParameters);
+        System.out.println("BatchStatus = " + (lastExecution != null ? lastExecution.getStatus().name() : null));
+        if(lastExecution != null) {
+            for (StepExecution execution : lastExecution.getStepExecutions()) {
+                BatchStatus status = execution.getStatus();
+                System.out.println("BatchStatus = " + status.isRunning());
+                System.out.println("BatchStatus = " + status.name());
+            }
+        }
+    }
+
+    @Override
+    public void afterJob(JobExecution jobExecution) {
+        String jobName = jobExecution.getJobInstance().getJobName();
+        JobParameters jobParameters = new JobParametersBuilder().addString("name", "song4").toJobParameters();
+        JobExecution lastExecution = jobRepository.getLastJobExecution(jobName, jobParameters);
+        System.out.println("BatchStatus = " + (lastExecution != null ? lastExecution.getStatus().name() : null));
+        if(lastExecution != null) {
+            for (StepExecution execution : lastExecution.getStepExecutions()) {
+                BatchStatus status = execution.getStatus();
+                System.out.println("BatchStatus = " + status.isRunning());
+                System.out.println("BatchStatus = " + status.name());
+            }
+        }
+    }
 }
