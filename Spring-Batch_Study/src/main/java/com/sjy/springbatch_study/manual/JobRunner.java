@@ -23,10 +23,8 @@ public class  JobRunner implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
 
         JobParameters jobParameters = new JobParametersBuilder()
-                .addString("name", "song4")
-                .addLong("id", 1L)
-                .addLocalDateTime("data", LocalDateTime.now())
-                .addDouble("age", 16.6)
+                .addString("requestDate", "20210102")
+                .addLocalDateTime("LocalDateTime", LocalDateTime.now())
                 .toJobParameters();
 
         jobLauncher.run(job,jobParameters);

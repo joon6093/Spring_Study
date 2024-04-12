@@ -17,7 +17,7 @@ spring:
       hibernate:
         format_sql: true
         highlight_sql: true
-        hbm2ddl.auto: create-drop
+        hbm2ddl.auto: create
         default_batch_fetch_size: 100
     open-in-view: true
     show-sql: true
@@ -26,4 +26,6 @@ spring:
     jdbc:
       initialize-schema: always
     job:
-      enabled: false
+      enabled: true
+      name: Job2
+
