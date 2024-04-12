@@ -18,6 +18,7 @@ import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.transaction.PlatformTransactionManager;
 
@@ -30,6 +31,7 @@ public class FileJobConfiguration {
     private final PlatformTransactionManager transactionManager;
 
     @Bean
+    @Primary
     public Job fileJob(Step fileStep1) {
         return new JobBuilder("fileJob", jobRepository)
                 .start(fileStep1)
