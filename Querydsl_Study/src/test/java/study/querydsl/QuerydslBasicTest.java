@@ -10,8 +10,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import study.querydsl.entity.Member;
 import study.querydsl.entity.QMember;
 import study.querydsl.entity.Team;
+import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static study.querydsl.entity.QMember.member;
 
 @SpringBootTest
 @Transactional
@@ -19,6 +21,7 @@ public class QuerydslBasicTest {
 
     @PersistenceContext
     EntityManager em;
+    JPAQueryFactory queryFactory;
 
     @BeforeEach
     public void before() {
@@ -50,7 +53,7 @@ public class QuerydslBasicTest {
 
     @Test
     public void startQuerydsl() {
-        JPAQueryFactory queryFactory = new JPAQueryFactory(em);
+        queryFactory = new JPAQueryFactory(em);
         QMember m = new QMember("m");
 
         Member findMember = queryFactory
@@ -60,5 +63,19 @@ public class QuerydslBasicTest {
                 .fetchOne();
 
         assertThat(findMember.getUsername()).isEqualTo("member1");
+    }
+
+    @Test
+    public void searchAndParam() {
+        queryFactory = new JPAQueryFactory(em);
+        List<Member> result1 = queryFactory
+                .selectFrom(member)
+                .where(
+                        member.username.eq("member1"),
+                        member.age.eq(10)
+                )
+                .fetch();
+
+        assertThat(result1.size()).isEqualTo(1);
     }
 }
