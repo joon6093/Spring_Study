@@ -1,6 +1,7 @@
 package study.querydsl;
 
 import com.querydsl.core.QueryResults;
+import com.querydsl.core.Tuple;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -16,6 +17,7 @@ import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static study.querydsl.entity.QMember.member;
+import static study.querydsl.entity.QTeam.team;
 
 @SpringBootTest
 @Transactional
@@ -125,5 +127,42 @@ public class QuerydslBasicTest {
         assertThat(queryResults.getLimit()).isEqualTo(2);
         assertThat(queryResults.getOffset()).isEqualTo(1);
         assertThat(queryResults.getResults().size()).isEqualTo(2);
+    }
+
+    @Test
+    public void aggregation() throws Exception {
+        Tuple result = queryFactory
+                .select(member.count(),
+                        member.age.sum(),
+                        member.age.avg(),
+                        member.age.max(),
+                        member.age.min())
+                .from(member)
+                .fetchOne();
+
+        assertThat(result.get(member.count())).isEqualTo(4);
+        assertThat(result.get(member.age.sum())).isEqualTo(100);
+        assertThat(result.get(member.age.avg())).isEqualTo(25);
+        assertThat(result.get(member.age.max())).isEqualTo(40);
+        assertThat(result.get(member.age.min())).isEqualTo(10);
+    }
+
+    @Test
+    public void group() throws Exception {
+        List<Tuple> result = queryFactory
+                .select(team.name, member.age.avg())
+                .from(member)
+                .join(member.team, team)
+                .groupBy(team.name)
+                .fetch();
+
+        Tuple teamA = result.get(0);
+        Tuple teamB = result.get(1);
+
+        assertThat(teamA.get(team.name)).isEqualTo("teamA");
+        assertThat(teamA.get(member.age.avg())).isEqualTo(15);
+        
+        assertThat(teamB.get(team.name)).isEqualTo("teamB");
+        assertThat(teamB.get(member.age.avg())).isEqualTo(35);
     }
 }
