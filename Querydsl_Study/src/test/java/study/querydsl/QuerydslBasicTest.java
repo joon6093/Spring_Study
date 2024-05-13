@@ -25,10 +25,13 @@ public class QuerydslBasicTest {
 
     @BeforeEach
     public void before() {
+        queryFactory = new JPAQueryFactory(em);
+
         Team teamA = new Team("teamA");
         Team teamB = new Team("teamB");
         em.persist(teamA);
         em.persist(teamB);
+
         Member member1 = new Member("member1", 10, teamA);
         Member member2 = new Member("member2", 20, teamA);
         Member member3 = new Member("member3", 30, teamB);
@@ -53,7 +56,6 @@ public class QuerydslBasicTest {
 
     @Test
     public void startQuerydsl() {
-        queryFactory = new JPAQueryFactory(em);
         QMember m = new QMember("m");
 
         Member findMember = queryFactory
@@ -67,7 +69,6 @@ public class QuerydslBasicTest {
 
     @Test
     public void searchAndParam() {
-        queryFactory = new JPAQueryFactory(em);
         List<Member> result1 = queryFactory
                 .selectFrom(member)
                 .where(
@@ -77,5 +78,23 @@ public class QuerydslBasicTest {
                 .fetch();
 
         assertThat(result1.size()).isEqualTo(1);
+    }
+
+    @Test
+    public void sort() {
+        em.persist(new Member(null, 100));
+        em.persist(new Member("member5", 100));
+        em.persist(new Member("member6", 100));
+        List<Member> result = queryFactory
+                .selectFrom(member)
+                .where(member.age.eq(100))
+                .orderBy(member.age.desc(), member.username.asc().nullsLast())
+                .fetch();
+        Member member5 = result.get(0);
+        Member member6 = result.get(1);
+        Member memberNull = result.get(2);
+        assertThat(member5.getUsername()).isEqualTo("member5");
+        assertThat(member6.getUsername()).isEqualTo("member6");
+        assertThat(memberNull.getUsername()).isNull();
     }
 }
