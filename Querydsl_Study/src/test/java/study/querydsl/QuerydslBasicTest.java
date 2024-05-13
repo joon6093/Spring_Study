@@ -196,4 +196,17 @@ public class QuerydslBasicTest {
                 .extracting("username")
                 .containsExactly("teamA", "teamB");
     }
+
+    @Test
+    public void theta_join_fetch_both() throws Exception {
+        em.persist(new Member("teamA"));
+        em.persist(new Member("teamB"));
+
+        // Member와 Team 객체 모두를 선택하여 가져오기
+        List<Tuple> result = queryFactory
+                .select(member, team)
+                .from(member, team)
+                .where(member.username.eq(team.name))
+                .fetch();
+    }
 }
