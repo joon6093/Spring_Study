@@ -18,6 +18,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import study.querydsl.dto.MemberDto;
+import study.querydsl.dto.QMemberDto;
 import study.querydsl.dto.UserDto;
 import study.querydsl.entity.Member;
 import study.querydsl.entity.QMember;
@@ -495,6 +496,16 @@ public class QuerydslBasicTest {
                 .select(Projections.constructor(UserDto.class,
                         member.username,
                         member.age))
+                .from(member)
+                .fetch();
+
+        System.out.println(result);
+    }
+
+    @Test
+    public void findDtoByQueryProjection() {
+        List<MemberDto> result = queryFactory
+                .select(new QMemberDto(member.username, member.age))  // 프로젝트 상황에 따라 유연하게 선택하기
                 .from(member)
                 .fetch();
 
