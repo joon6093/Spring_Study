@@ -567,4 +567,35 @@ public class QuerydslBasicTest {
     private BooleanExpression allEq(String usernameCond, Integer ageCond) {  // 조립할 수 있다는 최대 장점 하지만 null 체크에 주의
         return usernameEq(usernameCond).and(ageEq(ageCond));
     }
+
+    @Test
+    public void bulkUpdate() { //영속성 컨텍스트와 다름
+        long count = queryFactory
+                .update(member)
+                .set(member.username, "비회원")
+                .where(member.age.lt(28))
+                .execute();
+
+        System.out.println(count);
+    }
+
+    @Test
+    public void bulkAdd() { //영속성 컨텍스트와 다름
+        long count = queryFactory
+                .update(member)
+                .set(member.age, member.age.add(1))
+                .execute();
+
+        System.out.println(count);
+    }
+
+    @Test
+    public void bulkDelete() { //영속성 컨텍스트와 다름
+        long count = queryFactory
+                .delete(member)
+                .where(member.age.gt(18))
+                .execute();
+
+        System.out.println(count);
+    }
 }
