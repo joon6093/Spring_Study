@@ -1,4 +1,4 @@
-package study.querydsl;
+package study.querydsl.repository;
 
 import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.Test;
@@ -9,7 +9,6 @@ import study.querydsl.dto.MemberSearchCondition;
 import study.querydsl.dto.MemberTeamDto;
 import study.querydsl.entity.Member;
 import study.querydsl.entity.Team;
-import study.querydsl.repository.MemberJpaRepository;
 
 import java.util.List;
 
