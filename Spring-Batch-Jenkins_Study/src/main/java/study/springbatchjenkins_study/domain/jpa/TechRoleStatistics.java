@@ -21,13 +21,21 @@ public class TechRoleStatistics {
     @Column(nullable = false)
     private Long count;
 
+    @Column(nullable = false)
+    private Long matchesSelfAssessmentCount;
+
     @Builder
-    public TechRoleStatistics(TechRole role, Long count) {
+    public TechRoleStatistics(TechRole role, Long count, Long matchesSelfAssessmentCount) {
         this.role = role;
         this.count = count;
+        this.matchesSelfAssessmentCount = matchesSelfAssessmentCount;
     }
 
     public void updateCount(Long count) {
         this.count = count;
+    }
+
+    public void updateMatchesSelfAssessmentCount(Long matchesSelfAssessmentCount) {
+        this.matchesSelfAssessmentCount = matchesSelfAssessmentCount;
     }
 }

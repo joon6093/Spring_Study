@@ -33,10 +33,12 @@ public class InitData {
                 TechPreferenceTestResult.builder()
                         .result(TechRole.BACKEND_TRAFFIC_CONTROLLER)
                         .createdAt(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
+                        .matchesSelfAssessment(true)
                         .build(),
                 TechPreferenceTestResult.builder()
                         .result(TechRole.FRONTEND_UI_MAGICIAN)
                         .createdAt(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
+                        .matchesSelfAssessment(false)
                         .build()
         );
 
