@@ -38,3 +38,6 @@ out/
 
 ### Docker ###
 /docker-compose/data/
+
+### Security ###
+src/main/resources/security
