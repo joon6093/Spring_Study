@@ -11,7 +11,7 @@ spring:
 
   batch:
     job:
-      enabled: true
+      name: techRoleStatisticsJob
     jdbc:
       initialize-schema: always
 
