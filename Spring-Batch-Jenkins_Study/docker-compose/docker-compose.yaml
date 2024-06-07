@@ -10,9 +10,9 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=root
       - MONGO_INITDB_ROOT_PASSWORD=1234
     volumes:
-      - ./data/db:/data/db
+      - ./mongodb/data/db:/data/db
     networks:
-      - network-mongo
+      - dev-network
     hostname: mongodb
 
   mongo-express:
@@ -32,9 +32,29 @@ services:
       - ME_CONFIG_BASICAUTH_PASSWORD=1234
       - ME_CONFIG_MONGODB_URL=mongodb://root:1234@mongodb:27017/
     networks:
-      - network-mongo
+      - dev-network
     hostname: mongo-express
 
+  jenkins:
+    image: jenkins/jenkins:lts-jdk17
+    container_name: jenkins
+    environment:
+      - TZ=Asia/Seoul
+    user: root
+    privileged: true
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - ./jenkins/jenkins_home:/var/jenkins_home
+    networks:
+      - dev-network
+    hostname: jenkins
+
 networks:
-  network-mongo:
+  dev-network:
     driver: bridge
+
+volumes:
+  jenkins_home:
+    driver: local

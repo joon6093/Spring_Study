@@ -37,7 +37,8 @@ out/
 .vscode/
 
 ### Docker ###
-/docker-compose/data/
+/docker-compose/jenkins/
+/docker-compose/mongodb/
 
 ### Security ###
 src/main/resources/security
