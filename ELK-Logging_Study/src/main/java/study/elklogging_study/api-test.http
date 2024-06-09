@@ -1,0 +1,29 @@
+### Hello API 테스트
+GET http://localhost:8080/api/hello
+Content-Type: application/json
+
+###
+
+### Echo API 테스트
+POST http://localhost:8080/api/echo
+Content-Type: application/json
+
+{
+  "message": "Hello, Echo!"
+}
+
+###
+
+### Error API 테스트
+POST http://localhost:8080/api/error
+Content-Type: application/json
+
+{
+  "message": "This will cause an error"
+}
+
+###
+
+### No Log API 테스트
+GET http://localhost:8080/api/no-log
+Content-Type: application/json
