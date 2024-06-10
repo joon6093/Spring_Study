@@ -31,7 +31,7 @@ setup.template.settings:
   index.number_of_shards: 1
 
 output.logstash:
-  hosts: ["host.docker.internal:5044"]
+  hosts: ["172.31.26.95:5044"]  # Monitoring Server Private IP
 
 processors:
   - add_host_metadata:
