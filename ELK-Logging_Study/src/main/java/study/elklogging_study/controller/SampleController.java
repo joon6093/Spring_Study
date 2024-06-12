@@ -1,9 +1,12 @@
-package study.elklogging_study;
+package study.elklogging_study.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+import study.elklogging_study.aop.NotLogging;
 
 @RestController
 @RequestMapping("/api")
+@Slf4j
 public class SampleController {
 
     @GetMapping("/hello")
@@ -18,6 +21,7 @@ public class SampleController {
 
     @PostMapping("/error")
     public String throwError(@RequestBody String message) {
+        log.error("Error message: {}", message);
         throw new RuntimeException("Test Exception");
     }
 

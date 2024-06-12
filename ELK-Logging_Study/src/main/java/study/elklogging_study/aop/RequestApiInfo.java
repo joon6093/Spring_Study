@@ -1,4 +1,4 @@
-package study.elklogging_study;
+package study.elklogging_study.aop;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.Getter;

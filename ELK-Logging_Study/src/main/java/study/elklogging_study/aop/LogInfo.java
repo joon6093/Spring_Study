@@ -1,4 +1,4 @@
-package study.elklogging_study;
+package study.elklogging_study.aop;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

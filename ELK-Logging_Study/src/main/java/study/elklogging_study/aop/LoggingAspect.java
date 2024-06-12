@@ -1,4 +1,4 @@
-package study.elklogging_study;
+package study.elklogging_study.aop;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +21,7 @@ public class LoggingAspect {
     private static final Logger logger = LoggerFactory.getLogger(LoggingAspect.class);
     private final ObjectMapper objectMapper;
 
-    @Pointcut("within(*..*Controller) && !@annotation(study.elklogging_study.NotLogging)")
+    @Pointcut("within(*..*Controller) && !@annotation(study.elklogging_study.aop.NotLogging)")
     public void onRequest() {}
 
     @Around("onRequest()")
