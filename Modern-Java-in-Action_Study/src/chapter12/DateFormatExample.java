@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class DateFormatExperiment {
+public class DateFormatExample {
     public static void main(String[] args) {
         LocalDate today = LocalDate.now();
 

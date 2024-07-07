@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-public class FindFirstAndFindAnyParallel {
+public class FindFirstAndFindAnyParallelExample {
     public static void main(String[] args) {
         List<String> list = Arrays.asList("a", "b", "c", "d", "e");
 
