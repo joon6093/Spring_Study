@@ -1,4 +1,4 @@
-package chapter1.BehaviorParameterization;
+package chapter2.BehaviorParameterization;
 
 public class Apple {
     private String color;

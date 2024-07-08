@@ -1,7 +1,7 @@
-package chapter1.BehaviorParameterization.Lambda;
+package chapter2.BehaviorParameterization.Lambda;
 
-import chapter1.BehaviorParameterization.Apple;
-import chapter1.BehaviorParameterization.AppleFormatter;
+import chapter2.BehaviorParameterization.Apple;
+import chapter2.BehaviorParameterization.AppleFormatter;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package chapter1.BehaviorParameterization;
+package chapter2.BehaviorParameterization;
 
 public interface AppleFormatter {
     String accept(Apple apple);

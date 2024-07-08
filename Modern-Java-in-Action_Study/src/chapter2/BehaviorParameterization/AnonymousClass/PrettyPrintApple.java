@@ -1,7 +1,7 @@
-package chapter1.BehaviorParameterization.AnonymousClass;
+package chapter2.BehaviorParameterization.AnonymousClass;
 
-import chapter1.BehaviorParameterization.Apple;
-import chapter1.BehaviorParameterization.AppleFormatter;
+import chapter2.BehaviorParameterization.Apple;
+import chapter2.BehaviorParameterization.AppleFormatter;
 
 import java.util.List;
 
