@@ -1,4 +1,7 @@
-package chapter1.BehaviorParameterization;
+package chapter1.BehaviorParameterization.implement;
+
+import chapter1.BehaviorParameterization.Apple;
+import chapter1.BehaviorParameterization.AppleFormatter;
 
 import java.util.List;
 
