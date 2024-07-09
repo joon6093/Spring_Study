@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import static java.lang.Long.compare;
+
 public class ReduceExample {
 
     public static void main(String[] args) {
