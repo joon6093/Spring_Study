@@ -20,7 +20,7 @@ class ClassC extends AbstractClassB implements InterfaceA {
     }
 }
 
-// Main class
+// GropingExample class
 public class CombinedExample {
     public static void main(String[] args) {
         ClassC c = new ClassC();
