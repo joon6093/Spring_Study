@@ -1,4 +1,4 @@
-package study.hexagonal.account.application.adapter.out.persistence;
+package study.hexagonal.account.adapter.out.persistence;
 
 import java.util.ArrayList;
 import java.util.List;

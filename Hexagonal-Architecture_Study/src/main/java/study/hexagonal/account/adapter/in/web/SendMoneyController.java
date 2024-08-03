@@ -1,4 +1,4 @@
-package study.hexagonal.account.application.adapter.in.web;
+package study.hexagonal.account.adapter.in.web;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PathVariable;
