@@ -1,4 +1,4 @@
-package study.hexagonal.account.service;
+package study.hexagonal.account.application.service;
 
 
 import study.hexagonal.account.domain.Money;
