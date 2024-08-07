@@ -22,6 +22,7 @@ public class BankMain {
         sleep(500); // 검증 완료까지 잠시 대기
         log("t1 state: " + t1.getState());
         log("t2 state: " + t2.getState());
+        t1.interrupt();
 
         t1.join();
         t2.join();
