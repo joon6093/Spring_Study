@@ -16,8 +16,8 @@ public class LockSupportMainV1 {
         log("Thread-1 state: " + thread1.getState());
 
         log("main -> unpark(Thread-1)");
-        LockSupport.unpark(thread1); // 1. unpark 사용
-//        thread1.interrupt(); // 2. interrupt() 사용
+//        LockSupport.unpark(thread1); // 1. unpark 사용
+        thread1.interrupt(); // 2. interrupt() 사용
     }
 
     static class ParkTest implements Runnable {
@@ -27,7 +27,12 @@ public class LockSupportMainV1 {
             log("park 시작");
             LockSupport.park();
             log("park 종료, state: " + Thread.currentThread().getState());
-            log("인터럽트 상태: " + Thread.currentThread().isInterrupted());
+            log("인터럽트 상태1: " + Thread.currentThread().isInterrupted());
+            try {
+                Thread.sleep(10000);
+            } catch (InterruptedException e) {
+                log("인터럽트 상태2: " + Thread.currentThread().isInterrupted());
+            }
         }
     }
 }
