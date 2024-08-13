@@ -29,5 +29,4 @@ public class AspectV4Pointcut {
             log.info("[리소스 릴리즈] {}", joinPoint.getSignature());
         }
     }
-
 }
