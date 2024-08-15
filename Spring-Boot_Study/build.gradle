@@ -59,8 +59,19 @@ dependencies {
     implementation 'org.yaml:snakeyaml'
 */
 
+/*
     //3. 스프링 부트 스타터
     implementation 'org.springframework.boot:spring-boot-starter-web'
+ */
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    compileOnly 'org.projectlombok:lombok'
+    runtimeOnly 'com.h2database:h2'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testCompileOnly 'org.projectlombok:lombok'
+    testAnnotationProcessor 'org.projectlombok:lombok'
 }
 
 tasks.named('test') {
