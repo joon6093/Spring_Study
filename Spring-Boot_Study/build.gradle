@@ -17,6 +17,9 @@ repositories {
     mavenCentral()
 }
 
+//스프링 부트 외부 라이브러리 버전 변경
+//ext['tomcat.version']='10.1.4'
+
 dependencies {
 /*
     //1. 라이브러리 직접 지정
