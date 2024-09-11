@@ -4,17 +4,17 @@ import baseball.dto.PlayerScoreDto;
 import baseball.execption.ExceptionMessage;
 import baseball.model.BaseballGame;
 import baseball.model.BaseballGameValue;
-import baseball.model.ComputerPlayer;
-import baseball.model.HumanPlayer;
+import baseball.model.Player;
 import baseball.view.ConsoleInputView;
 import baseball.view.ConsoleOutputView;
+import baseball.view.InputView;
+import baseball.view.OutputView;
+import baseball.view.RandomInputView;
 
 public class BaseballController {
-    private static final String RESTART = "1";
-    private static final String END = "2";
-
-    private final ConsoleInputView inputView = new ConsoleInputView();
-    private final ConsoleOutputView outputView = new ConsoleOutputView();
+    private final InputView randomInputView = new RandomInputView();
+    private final InputView consoleInputView = new ConsoleInputView();
+    private final OutputView outputView = new ConsoleOutputView();
 
     public void runBaseballGame() {
         boolean playAgain;
@@ -26,13 +26,12 @@ public class BaseballController {
     }
 
     private void runSingleGame() {
-        ComputerPlayer computerPlayer = new ComputerPlayer();
+        Player computerPlayer = new Player(randomInputView.getInputNumbers());
+
         boolean gameComplete = false;
 
         while (!gameComplete) {
-            outputView.displayInputPrompt();
-            String input = inputView.getInputPlayerNumbers();
-            HumanPlayer humanPlayer = HumanPlayer.fromInput(input);
+            Player humanPlayer = new Player(consoleInputView.getInputNumbers());
 
             BaseballGame game = new BaseballGame(computerPlayer, humanPlayer);
             PlayerScoreDto result = game.playGame();
@@ -48,11 +47,11 @@ public class BaseballController {
 
     private boolean askForReplay() {
         outputView.displayRetryPrompt();
-        String input = inputView.getInputPlayerNumbers();
+        int input = consoleInputView.getInputNumbers();
 
-        if (input.equals(RESTART)) {
+        if (input == 1) {
             return true;
-        } else if (input.equals(END)) {
+        } else if (input == 2) {
             return false;
         } else {
             throw new IllegalArgumentException(ExceptionMessage.RESTART_COMMAND.getMessage());
