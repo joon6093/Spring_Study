@@ -3,14 +3,18 @@ package racingcar.controller;
 import java.util.List;
 import racingcar.dto.RaceDto;
 import racingcar.model.Race;
-import racingcar.view.ConsoleInputView;
-import racingcar.view.ConsoleOutputView;
+import racingcar.view.ConsoleView;
 import racingcar.view.InputView;
 import racingcar.view.OutputView;
 
 public class RacingGameController {
-    private final InputView consoleInputView = new ConsoleInputView();
-    private final OutputView consoleOutputView = new ConsoleOutputView();
+    private final InputView consoleInputView;
+    private final OutputView consoleOutputView;
+
+    public RacingGameController(InputView consoleInputView, OutputView consoleOutputView) {
+        this.consoleInputView = consoleInputView;
+        this.consoleOutputView = consoleOutputView;
+    }
 
     public void run() {
         List<String> carNames = consoleInputView.inputCarNames();
