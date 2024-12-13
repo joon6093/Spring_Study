@@ -3,6 +3,7 @@ package oncall.controller;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
+import oncall.RetryUtil;
 import oncall.domain.Administrator;
 import oncall.domain.MonthAndDay;
 import oncall.domain.Roster;
@@ -31,11 +32,11 @@ public class OncallController {
     }
 
     private MonthAndDay getMonthAndDay() {
-        return executeWithRetry(inputView::readMonthAndDay);
+        return retryUntilSuccess(inputView::readMonthAndDay);
     }
 
     private Administrator getAdministrator() {
-        return executeWithRetry(() -> {
+        return retryUntilSuccess(() -> {
             WeekdayList weekdayList = new WeekdayList(inputView.readWeekdayList().stream()
                     .map(Worker::new)
                     .toList());
@@ -60,13 +61,7 @@ public class OncallController {
         return rosters;
     }
 
-    private <T> T executeWithRetry(final Supplier<T> supplier) {
-        while (true) {
-            try {
-                return supplier.get();
-            } catch (IllegalArgumentException e) {
-                outputView.printErrorMessage(e.getMessage());
-            }
-        }
+    private <T> T retryUntilSuccess(final Supplier<T> supplier) {
+        return RetryUtil.executeWithRetry(supplier, outputView::printErrorMessage);
     }
 }

@@ -61,7 +61,7 @@ public class Administrator {
         return new Roster(workingDay, worker);
     }
 
-    public int calculateIndex(int index, final int size) {
+    private int calculateIndex(int index, final int size) {
         return index % size;
     }
 
