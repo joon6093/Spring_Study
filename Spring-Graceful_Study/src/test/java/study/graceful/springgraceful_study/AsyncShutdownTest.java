@@ -12,6 +12,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ThreadPoolExecutor;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -148,6 +149,24 @@ class AsyncShutdownTest {
         assertThrows(
                 TaskRejectedException.class, () -> executor.execute(() -> {
                 })
+        );
+    }
+
+    @Test
+    void NonBeanExecutor는_컨텍스트_종료후에는_새로운_작업_제출이_거절되지_않는다() {
+        // given
+        final AnnotationConfigApplicationContext ctx =
+                new AnnotationConfigApplicationContext(NonBeanAsyncConfig.class);
+
+        final NonBeanAsyncConfig config = ctx.getBean(NonBeanAsyncConfig.class);
+        final ThreadPoolTaskExecutor executor = (ThreadPoolTaskExecutor) config.getAsyncExecutor();
+
+        // when
+        ctx.close();
+
+        // then
+        assertDoesNotThrow(() ->
+                executor.execute(() -> System.out.println(">>> 작업 제출 성공"))
         );
     }
 }
